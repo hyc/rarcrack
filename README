@@ -1,0 +1,25 @@
+This is a quick'n'dirty program for cracking password-protected RAR archives. It
+uses libunrar, so you need that library. If you don't have it you can fetch
+it from http://www.rarlab.com/rar_add.htm
+
+Copyright 2013 (c) Howard Chu <hyc@symas.com>
+
+This code may be freely used by anyone as long as you don't claim you wrote it.
+
+This is a simpler/faster version of the program at http://rarcrack.sourceforge.net/
+The program expects to read candidate passwords on stdin. The most obvious way
+to use it is with a program like JohnTheRipper generating passwords, and feeding
+them in, like so:
+
+john --wordlist=rockyou.txt --rules --stdout | rarcrack crypted.rar
+
+Compile the program as:
+	gcc -O2 -o rarcrack rarcrack.c -lunrar
+
+If you get an error about "dll.hpp" missing you'll have to grab that file from
+the unrar source code. You can get it at rarlab.com if all else fails.
+
+
+Note that this program is already obsolete; if you have John the Ripper with
+the Jumbo patch (1.7.9-jumbo-7) then you can just use rar2john instead of this
+code.
